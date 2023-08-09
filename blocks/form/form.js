@@ -96,6 +96,10 @@ function createLabel(fd, tagName = 'label') {
   label.setAttribute('for', fd.Id);
   label.className = 'field-label';
   label.textContent = fd.Label || '';
+  if (fd.Type !== 'radio') {
+    label.setAttribute('itemprop', 'Label');
+    label.setAttribute('itemtype', 'text');
+  }
   if (fd.Tooltip) {
     label.title = fd.Tooltip;
   }
@@ -106,6 +110,8 @@ function createHelpText(fd) {
   const div = document.createElement('div');
   div.className = 'field-description';
   div.setAttribute('aria-live', 'polite');
+  div.setAttribute('itemtype', 'text');
+  div.setAttribute('itemprop', 'Description');
   div.innerText = fd.Description;
   div.id = `${fd.Id}-description`;
   return div;
@@ -113,6 +119,12 @@ function createHelpText(fd) {
 
 function createFieldWrapper(fd, tagName = 'div') {
   const fieldWrapper = document.createElement(tagName);
+  if (fd.Type !== 'radio') {
+    fieldWrapper.setAttribute('itemtype', 'component');
+    fieldWrapper.setAttribute('itemid', generateItemId(fd.Id));
+    fieldWrapper.setAttribute('itemscope', '');
+    fieldWrapper.setAttribute('data-editor-itemlabel', fd.Label || fd.Name);
+  }
   const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
   const fieldId = `form-${fd.Type}-wrapper${nameStyle}`;
   fieldWrapper.className = fieldId;
@@ -212,6 +224,7 @@ function createLegend(fd) {
 function createFieldSet(fd) {
   const wrapper = createFieldWrapper(fd, 'fieldset');
   wrapper.name = fd.Name;
+  wrapper.setAttribute('itemtype', 'container');
   wrapper.replaceChildren(createLegend(fd));
   if (fd.Repeatable && fd.Repeatable.toLowerCase() === 'true') {
     setConstraints(wrapper, fd);
@@ -299,6 +312,7 @@ async function fetchForm(pathname) {
 
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
+  window.formPath = pathname;
   const data = await fetchForm(pathname);
   const form = document.createElement('form');
   data.forEach((fd) => {
@@ -329,10 +343,23 @@ async function createForm(formURL) {
   return form;
 }
 
+function generateItemId(id) {
+  if (id) {
+    return `urn:fnkconnection:${window.formPath}:default:Id:${id}`;
+  } else {
+    return `urn:fnkconnection:${window.formPath}:default`;
+  }
+}
+
+
 export default async function decorate(block) {
   const formLink = block.querySelector('a[href$=".json"]');
   if (formLink) {
     const form = await createForm(formLink.href);
+    form.setAttribute('itemid', generateItemId());
+    form.setAttribute('itemtype', 'container');
+    form.setAttribute('itemscope', '');
+    form.setAttribute('data-editor-itemlabel', "Form Container");
     formLink.replaceWith(form);
   }
 }
