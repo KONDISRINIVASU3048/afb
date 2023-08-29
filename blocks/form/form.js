@@ -124,6 +124,7 @@ function createFieldWrapper(fd, tagName = 'div') {
     fieldWrapper.setAttribute('itemid', generateItemId(fd.Id));
     fieldWrapper.setAttribute('itemscope', '');
     fieldWrapper.setAttribute('data-editor-itemlabel', fd.Label || fd.Name);
+    fieldWrapper.setAttribute('data-editor-itemmodel', fd.Type);
   }
   const nameStyle = fd.Name ? ` form-${fd.Name}` : '';
   const fieldId = `form-${fd.Type}-wrapper${nameStyle}`;
