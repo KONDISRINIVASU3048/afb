@@ -85,6 +85,87 @@
                         ]
                     }
                 },
+                 {
+                    "title": "Text Area",
+                    "id": "textarea",
+                    "plugins": {
+                        "fnk": {
+                            "form": {
+                                "Type": "textarea",
+                                "Label": "Text Area"
+                            }
+                        }
+                    },
+                    "model": {
+                        "id": "textarea",
+                        "fields": [
+                            {
+                                "component": "text-input",
+                                "name": "Name",
+                                "label": "Name",
+                                "valueType": "string",
+                                "required": true
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Label",
+                                "label": "Label",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Description",
+                                "label": "Description",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Placeholder",
+                                "label": "Placeholder",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "boolean",
+                                "name": "Hidden",
+                                "label": "Hidden",
+                                "valueType": "boolean"
+                            },
+                            {
+
+                                "component": "boolean",
+                                "name": "Read Only",
+                                "label": "Read Only",
+                                "valueType": "boolean"
+                            },
+                            {
+                                "component": "boolean",
+                                "name": "Mandatory",
+                                "label": "Required",
+                                "valueType": "boolean"
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Value",
+                                "label": "Default Value",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "number",
+                                "name": "Min",
+                                "label": "Minimum Value",
+                                "valueType": "number",
+                                "description": "Minimum length of the text in the field"
+                            },
+                            {
+                                "component": "number",
+                                "name": "Max",
+                                "label": "Maximum Value",
+                                "valueType": "number",
+                                "description": "Maximum length of the text in the field"
+                            }
+                        ]
+                    }
+                },
                 {
                     "title": "Number Input",
                     "id": "numberinput",
