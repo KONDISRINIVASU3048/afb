@@ -509,6 +509,48 @@
                     }
                 },
                 {
+                    "title": "Submit Button",
+                    "id": "submit",
+                    "plugins": {
+                        "fnk": {
+                            "form": {
+                                "Type": "submit",
+                                "Label": "Submit"
+                            }
+                        }
+                    },
+                    "model": {
+                        "id": "submit",
+                        "fields": [
+                            {
+                                "component": "text-input",
+                                "name": "Name",
+                                "label": "Name",
+                                "valueType": "string",
+                                "required": true
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Label",
+                                "label": "Label",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "text-input",
+                                "name": "Description",
+                                "label": "Description",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "boolean",
+                                "name": "Hidden",
+                                "label": "Hidden",
+                                "valueType": "boolean"
+                            }
+                        ]
+                    }
+                },
+                {
                     "title": "File Attachment",
                     "id": "fileinput",
                     "plugins": {
