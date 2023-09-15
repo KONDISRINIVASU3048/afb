@@ -335,6 +335,7 @@ async function fetchForm(pathname) {
 
 async function createForm(formURL) {
   const { pathname } = new URL(formURL);
+  console.log(pathname);
   const data = await fetchForm(pathname);
   const form = document.createElement('form');
   data.forEach((fd) => {
